@@ -15,9 +15,9 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import com.sun.syndication.feed.atom.Content;
-import com.sun.syndication.feed.atom.Entry;
-import com.sun.syndication.feed.atom.Feed;
+import com.rometools.rome.feed.atom.Content;
+import com.rometools.rome.feed.atom.Entry;
+import com.rometools.rome.feed.atom.Feed;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;

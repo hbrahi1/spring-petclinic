@@ -16,17 +16,17 @@
 package org.springframework.samples.petclinic.repository.jdbc;
 
 import org.joda.time.DateTime;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
 /**
- * {@link ParameterizedRowMapper} implementation mapping data from a {@link ResultSet} to the corresponding properties
+ * {@link RowMapper} implementation mapping data from a {@link ResultSet} to the corresponding properties
  * of the {@link JdbcPet} class.
  */
-class JdbcPetRowMapper implements ParameterizedRowMapper<JdbcPet> {
+class JdbcPetRowMapper implements RowMapper<JdbcPet> {
 
     @Override
     public JdbcPet mapRow(ResultSet rs, int rownum) throws SQLException {

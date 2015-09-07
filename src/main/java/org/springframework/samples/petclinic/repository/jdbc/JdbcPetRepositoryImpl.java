@@ -20,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.samples.petclinic.model.Owner;
@@ -76,7 +76,7 @@ public class JdbcPetRepositoryImpl implements PetRepository {
         return this.namedParameterJdbcTemplate.query(
                 "SELECT id, name FROM types ORDER BY name",
                 params,
-                ParameterizedBeanPropertyRowMapper.newInstance(PetType.class));
+                BeanPropertyRowMapper.newInstance(PetType.class));
     }
 
     @Override

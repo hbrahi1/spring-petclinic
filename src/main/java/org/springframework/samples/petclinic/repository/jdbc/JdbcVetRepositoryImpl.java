@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.repository.VetRepository;
@@ -67,18 +67,18 @@ public class JdbcVetRepositoryImpl implements VetRepository {
         // Retrieve the list of all vets.
         vets.addAll(this.jdbcTemplate.query(
                 "SELECT id, first_name, last_name FROM vets ORDER BY last_name,first_name",
-                ParameterizedBeanPropertyRowMapper.newInstance(Vet.class)));
+                BeanPropertyRowMapper.newInstance(Vet.class)));
 
         // Retrieve the list of all possible specialties.
         final List<Specialty> specialties = this.jdbcTemplate.query(
                 "SELECT id, name FROM specialties",
-                ParameterizedBeanPropertyRowMapper.newInstance(Specialty.class));
+                BeanPropertyRowMapper.newInstance(Specialty.class));
 
         // Build each vet's list of specialties.
         for (Vet vet : vets) {
             final List<Integer> vetSpecialtiesIds = this.jdbcTemplate.query(
                     "SELECT specialty_id FROM vet_specialties WHERE vet_id=?",
-                    new ParameterizedRowMapper<Integer>() {
+                    new RowMapper<Integer>() {
                         @Override
                         public Integer mapRow(ResultSet rs, int row) throws SQLException {
                             return Integer.valueOf(rs.getInt(1));
